@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Adaptation Project Preview</title>
+
+	<style>
+		/* hide variant management popover footer */
+		.sapUiFlVarMngmtPopover .sapMPageWithFooter>section { bottom: 0 !important; }
+		.sapUiFlVarMngmtPopover .sapMPageFooter, .sapUICompVarMngmtPopover .sapMPageFooter { display: none !important; }
+	</style>
+	
+	<script type="text/javascript">
+		window["sap-ushell-config"] = {
+			defaultRenderer : "fiori2",
+			renderers: {
+				fiori2: {
+					componentData: {
+						config: {
+							appState: "headerless",
+							rootIntent: "adaptationproject-display"
+						}
+					}
+				}
+			},
+			applications: {
+				"adaptationproject-display": {
+					title: "Adaptation Project Preview",
+					additionalInformation: "SAPUI5.Component=nw.epm.refapps.purchaseorders.approve",
+					applicationType: "URL",
+					applicationDependencies: {"name":"nw.epm.refapps.purchaseorders.approve","url":"/sap/bc/ui5_ui5/sap/zsample_po_apv/~D026C15AFBD2A319F159CFBA0C26FEF4~5","manifest":{"_version":"1.5.0","sap.app":{"id":"customer.manage.products","type":"application","i18n":"i18n/i18n.properties","title":"Manage Products","subTitle":"SAP Fiori Reference App","tags":{"keywords":["Approve Purchase Orders","Purchase Orders"]},"applicationVersion":{"version":"3.0.0"},"ach":"BC-SRV-NWD-FRA","dataSources":{"mainService":{"uri":"/sap/opu/odata/sap/SEPMRA_PO_APV/","type":"OData","settings":{"odataVersion":"2.0","localUri":"localService/metadata.xml"}}},"resources":"resources.json","crossNavigation":{"inbounds":{"productsManage":{"semanticObject":"EPMPurchaseOrder","action":"approve","title":"Approve Purchase Orders","subTitle":"SAP Fiori Reference App","icon":"sap-icon://Fiori7/F1373","indicatorDataSource":{"dataSource":"mainService","path":"PurchaseOrders/$count","refresh":450},"signature":{"parameters":{"PurchaseOrder":{"required":false}},"additionalParameters":"allowed"}}}}},"sap.ui":{"technology":"UI5","icons":{"icon":"sap-icon://Fiori7/F1373","favIcon":"icon/F1373_Approve_Purchase_Orders.ico","phone":"icon/launchicon/57_iPhone_Desktop_Launch.png","phone@2":"icon/launchicon/114_iPhone-Retina_Web_Clip.png","tablet":"icon/launchicon/72_iPad_Desktop_Launch.png","tablet@2":"icon/launchicon/144_iPad_Retina_Web_Clip.png"},"deviceTypes":{"desktop":true,"tablet":true,"phone":true}},"sap.ui5":{"dependencies":{"minUI5Version":"1.44.17","libs":{"sap.ui.core":{},"sap.m":{},"sap.ui.layout":{},"sap.ushell":{}}},"models":{"i18n":{"type":"sap.ui.model.resource.ResourceModel","uri":"i18n/i18n.properties","settings":{"enhanceWith":[{"bundleUrl":"i18n/i18n.properties","bundleUrlRelativeTo":"manifest"}]}},"":{"dataSource":"mainService","settings":{"defaultCountMode":"Inline"}}},"rootView":"nw.epm.refapps.purchaseorders.approve.view.App","config":{"sapFiori2Adaptation":true},"routing":{"config":{"routerClass":"sap.m.routing.Router","viewType":"XML","async":true,"viewPath":"nw.epm.refapps.purchaseorders.approve.view","controlId":"approvalApp","bypassed":{"target":["master","empty"]}},"routes":[{"pattern":"","name":"main","target":["detail","master"]},{"pattern":"PurchaseOrder/{POId}","name":"PurchaseOrderDetails","target":["master","detail"]}],"targets":{"master":{"viewName":"S2_PurchaseOrders","viewLevel":1,"controlAggregation":"masterPages"},"detail":{"viewName":"S3_PurchaseOrderDetails","viewLevel":2,"controlAggregation":"detailPages"},"summary":{"viewName":"S3_PurchaseOrderSummary","viewLevel":3,"controlAggregation":"detailPages"},"empty":{"viewName":"EmptyPage","viewLevel":3,"controlAggregation":"detailPages"}}},"contentDensities":{"compact":true,"cozy":true},"componentName":"nw.epm.refapps.purchaseorders.approve","appVariantId":"customer.manage.products","appVariantIdHierarchy":[{"appVariantId":"nw.epm.refapps.purchaseorders.approve.Component","layer":"VENDOR","version":"3.0.0"}]},"sap.platform.hcp":{"uri":""},"sap.fiori":{"registrationIds":["F1373"],"archeType":"transactional"},"sap.platform.abap":{"uri":"/sap/bc/ui5_ui5/sap/zsample_po_apv","_version":"1.1.0"}},"self":{"name":"nw.epm.refapps.purchaseorders.approve","url":"/sap/bc/ui5_ui5/sap/zsample_po_apv/~D026C15AFBD2A319F159CFBA0C26FEF4~5"},"asyncHints":{"libs":[{"name":"sap.ushell"},{"name":"sap.ui.layout"},{"name":"sap.m"},{"name":"sap.ui.core"}],"requests":[{"name":"sap.ui.fl.changes","reference":"nw.epm.refapps.purchaseorders.approve.Component"}]},"altManifestUrl":"webapp/manifest.appdescr_variant","componentData":{"startupParameters":{"sap-ui-fl-max-layer":["CUSTOMER_BASE"]}}}
+				}
+			}
+		};
+	</script>
+
+	<script src="../../test-resources/sap/ushell/bootstrap/sandbox.js" id="sap-ushell-bootstrap"></script>
+
+	<script id="sap-ui-bootstrap"
+			src="../../resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.ushell, sap.ui.rta"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-xx-bindingSyntax="complex"
+			data-sap-ui-xx-rootComponentNode="content"
+			data-sap-ui-xx-designMode="true"
+			data-sap-ui-flexibilityServices='[{"connector": "LrepConnector", "layers": [], "url": "/sap/bc/lrep"},{"applyConnector": "WorkspaceApplyConnector", "writeConnector": "WorkspaceWriteConnector", "custom": true, "layers": ["CUSTOMER_BASE"]}]'
+			data-sap-ui-xx-suppressDeactivationOfControllerCode="true">
+	</script>
+
+	<script type="text/javascript">
+		sap.ui.getCore().attachInit(function() {
+			sap.ushell.Container.createRenderer().placeAt("content");
+		});
+	</script>
+
+	<script src="https://workspaces-ws-qg2b7-theia.us10.trial.applicationstudio.cloud.sap/watt/1.1000.15/webapp/resources/sap/watt/lib/lodash/lodash.js" type="text/javascript"></script>
+	<script src="https://workspaces-ws-qg2b7-theia.us10.trial.applicationstudio.cloud.sap/watt/features/ui5-visual-editor/0.0.11/sap.watt.saptoolsets.fiori.project.uiadaptationfeature/client/v1.0.96_1632731746313/src/uiadaptation/util/UIAdaptationTransceiver.js" type="text/javascript"></script>
+	<script src="https://workspaces-ws-qg2b7-theia.us10.trial.applicationstudio.cloud.sap/watt/features/ui5-visual-editor/0.0.11/sap.watt.saptoolsets.fiori.project.uiadaptationfeature/client/v1.0.96_1632731746313/src/uiadaptation/util/AppVariantPreviewHelper.js" type="text/javascript"></script>
+
+</head>
+
+<body class="sapUiBody" id="content" role="application">
+</body>
+
+</html>

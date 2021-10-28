@@ -1,0 +1,147 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/V2/Northwind/Northwind.svc/$metadata">
+        <edmx:Include Namespace="NorthwindModel"/>
+        <edmx:Include Namespace="ODataWeb.Northwind.Model"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="sap.fe.demo">
+        <!-- Removes the default search field on the app by setting it to false -->
+        <Annotations Target="ODataWeb.Northwind.Model.NorthwindEntities/Products">
+            <Annotation Term="Capabilities.SearchRestrictions">
+                <Record Type="Capabilities.SearchRestrictionsType">
+                    <PropertyValue Property="Searchable" Bool="false"/>
+                </Record>
+            </Annotation>
+            <!-- Removes the default delete button on the app by setting it to false -->
+            <Annotation Term="Capabilities.DeleteRestrictions">
+                <Record Type="Capabilities.DeleteRestrictionsType">
+                   <PropertyValue Property="Deletable" Bool="false"/> 
+                </Record>
+            </Annotation>
+             <!-- Removes the default Insert button on the app by setting it to false -->
+            <Annotation Term="Capabilities.InsertRestrictions">
+                <Record Type="Capabilities.InsertRestrictionsType">
+                    <PropertyValue Property="Insertable" Bool="false"/>
+                </Record>
+            </Annotation>
+        </Annotations>
+        <Annotations Target="NorthwindModel.Product/ProductName">
+            <!-- this will change the label for "ProductName" to "Product" globally-->
+            <Annotation Term="Common.Label" String="{@i18n>product}"/> 
+            <Annotation Term="Common.ValueList">
+                <Record Type="Common.ValueListType">
+                    <PropertyValue Property="CollectionPath" String="Alphabetical_list_of_products"/>
+                    <PropertyValue Property="Parameters">
+                        <Collection>
+                            <Record Type="Common.ValueListParameterInOut">
+                                <PropertyValue Property="LocalDataProperty" PropertyPath="ProductName"/>
+                                <PropertyValue Property="ValueListProperty" String="ProductName"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="Common.ValueListWithFixedValues"/>
+        </Annotations>
+        <!-- This combines the productID and product name whenevre it is displayed  -->
+        <Annotations Target="NorthwindModel.Product/ProductID">
+            <Annotation Term="Common.Text" Path="ProductName"/>
+        </Annotations>
+            <Annotations Target="NorthwindModel.Product"> 
+            <Annotation Term="UI.DataPoint" Qualifier="StockQty">
+                <Record Type="UI.DataPointType">
+                    <PropertyValue Property="Value" Path="UnitsInStock"/>
+                    <PropertyValue Property="CriticalityCalculation">
+                        <Record Type="UI.CriticalityCalculationType">
+                            <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+                            <PropertyValue Property="DeviationRangeLowValue" Path="ReorderLevel"/>
+                            <PropertyValue Property="ToleranceRangeLowValue" Path="ReorderLevel"/>
+                        </Record>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.Chart" Qualifier="StockQty">
+                <Record Type="UI.ChartDefinitionType">
+                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bullet"/>
+                    <PropertyValue Property="Measures">
+                        <Collection>
+                            <PropertyPath>UnitsInStock</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="MeasureAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartMeasureAttributeType">
+                                <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#StockQty"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.HeaderInfo" >
+                <Record Type="UI.HeaderInfoType">
+                    <PropertyValue Property="TypeName" String="{@i18n>product}"/>
+                    <PropertyValue Property="TypeNamePlural" String="{@i18n>products}"/>
+                </Record>
+            </Annotation>
+            <!-- This will highlight the unique ID of each product  -->
+            <Annotation Term="Common.SemanticKey" >
+                <Collection>
+                    <PropertyPath>ProductID</PropertyPath>
+                </Collection>
+            </Annotation>
+                <Annotation Term="UI.SelectionFields" >
+                    <Collection>
+                        <PropertyPath>ProductName</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem" >
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductID"/>
+                            <PropertyValue Property="Label" String="{@i18n>product}"/>
+                        </Record>
+                        <!-- No need for the field below (ProductName) anymore since we combined the product ID and product name fields, 
+                        therefore when we set the productID field it will also show the product name as well  -->
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductName"/>
+                        </Record> -->
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="QuantityPerUnit"/>
+                            <!-- the label property annotation changes the default column title to 
+                            the one you define inside the "String" property -->
+                            <PropertyValue Property="Label" String="{@i18n>quantity}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ReorderLevel"/>
+                            <PropertyValue Property="Label" String="{@i18n>reorderLevel}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UnitsInStock"/>
+                            <PropertyValue Property="Label" String="{@i18n>unitsInStock}"/>
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Chart#StockQty"/>
+                            <PropertyValue Property="Label" String="{@i18n>unitsInStock}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UnitPrice"/>
+                            <PropertyValue Property="Label" String="{@i18n>price}"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

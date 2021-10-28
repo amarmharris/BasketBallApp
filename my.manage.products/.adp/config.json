@@ -1,0 +1,20 @@
+{
+  "componentname": "nw.epm.refapps.st.prod.manage.new",
+  "safeMode": false,
+  "appvariant": "my.manage.products",
+  "layer": "CUSTOMER_BASE",
+  "sourceSystem": "ES5",
+  "isOVPApp": false,
+  "isFioriElement": true,
+  "environment": "ABAP",
+  "destinations": [
+    {
+      "name": "ES5",
+      "url": "https://sapes5.sapdevcenter.com"
+    },
+    {
+      "name": "sapui5",
+      "url": "http://sapui5.hana.ondemand.com/1.84.13"
+    }
+  ]
+}

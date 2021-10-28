@@ -1,0 +1,20 @@
+<mvc:View
+    controllerName="com.amar.basketball.controller.MainView"
+    displayBlock="true"
+    xmlns="sap.f"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc">
+	<FlexibleColumnLayout
+        	id="flexibleColumnLayout" 
+            backgroundDesign="Solid"
+            stateChange="onStateChange">
+
+    <beginColumnPages>
+      <mvc:XMLView id="beginView" viewName="com.amar.basketball.view.Master" />
+    </beginColumnPages>
+
+    <midColumnPages>
+      <mvc:XMLView id="detailView" viewName="com.amar.basketball.view.Detail" />
+    </midColumnPages>
+  </FlexibleColumnLayout>
+</mvc:View>
